@@ -1,13 +1,13 @@
 <div align="center">
 
 ```
-╔══════════════════════════════════════════╗
-║                                          ║
-║        🌸  BLOOM & PETAL STUDIO  🌸      ║
-║                                          ║
-║    Fresh Flowers. Thoughtfully Designed. ║
-║                                          ║
-╚══════════════════════════════════════════╝
+                                         ╔══════════════════════════════════════════╗
+                                         ║                                          ║
+                                         ║      🌸  BLOOM & PETAL STUDIO  🌸       ║
+                                         ║                                          ║
+                                         ║   Fresh Flowers. Thoughtfully Designed.  ║
+                                         ║                                          ║
+                                         ╚══════════════════════════════════════════╝
 ```
 
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react)](https://react.dev)
