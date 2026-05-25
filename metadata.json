@@ -1,0 +1,6 @@
+{
+  "name": "Bloom & Petal",
+  "description": "A premium floral design studio and shop based in San Luis Obispo, CA.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
