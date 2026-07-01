@@ -10,14 +10,22 @@ interface CartContextType {
   cart: CartItem[];
   addToCart: (product: Product, quantity: number) => void;
   removeFromCart: (productId: string) => void;
+  updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
   cartCount: number;
+  isCartOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const openCart = () => setIsCartOpen(true);
+  const closeCart = () => setIsCartOpen(false);
 
   const addToCart = (product: Product, quantity: number) => {
     setCart(prev => {
@@ -31,22 +39,23 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, { product, quantity }];
     });
-
-    // Simulate order history automatically when items are added
-    const historyJson = localStorage.getItem('orderHistory');
-    let history = historyJson ? JSON.parse(historyJson) : [];
-    history.unshift({
-      orderId: Math.random().toString(36).substring(2, 10).toUpperCase(),
-      date: new Date().toISOString(),
-      product,
-      quantity,
-      total: product.price * quantity
-    });
-    localStorage.setItem('orderHistory', JSON.stringify(history));
+    
+    // Open cart when item is added
+    setIsCartOpen(true);
   };
 
   const removeFromCart = (productId: string) => {
     setCart(prev => prev.filter(item => item.product.id !== productId));
+  };
+
+  const updateQuantity = (productId: string, quantity: number) => {
+    if (quantity <= 0) {
+      removeFromCart(productId);
+      return;
+    }
+    setCart(prev => prev.map(item => 
+      item.product.id === productId ? { ...item, quantity } : item
+    ));
   };
 
   const clearCart = () => setCart([]);
@@ -54,7 +63,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, cartCount }}>
+    <CartContext.Provider value={{ 
+      cart, addToCart, removeFromCart, updateQuantity, clearCart, 
+      cartCount, isCartOpen, openCart, closeCart 
+    }}>
       {children}
     </CartContext.Provider>
   );
