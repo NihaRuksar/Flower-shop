@@ -5,17 +5,21 @@ import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import CartDrawer from './components/CartDrawer';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import OrderHistory from './pages/OrderHistory';
 import Wishlist from './pages/Wishlist';
+import Checkout from './pages/Checkout';
+import OrderStatus from './pages/OrderStatus';
 
 function MainLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex flex-col min-h-screen w-full relative">
       <Navbar />
+      <CartDrawer />
       <motion.main
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -43,6 +47,8 @@ function AnimatedRoutes() {
         <Route path="/about" element={<MainLayout><About /></MainLayout>} />
         <Route path="/contact" element={<MainLayout><Contact /></MainLayout>} />
         <Route path="/history" element={<MainLayout><OrderHistory /></MainLayout>} />
+        <Route path="/checkout" element={<MainLayout><Checkout /></MainLayout>} />
+        <Route path="/track/:orderId" element={<MainLayout><OrderStatus /></MainLayout>} />
       </Routes>
     </AnimatePresence>
   );
