@@ -22,17 +22,23 @@ export default function ProductCard({ product, index }: ProductCardProps) {
   const handleAdd = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    
     addToCart(product, quantity);
     
-    if (isWishlisted) {
-      removeFromWishlist(product.id);
-    }
-    
     setAdded(true);
+    
     setTimeout(() => {
+      // Only reset added state if the component is still mounted
       setAdded(false);
       setQuantity(1);
     }, 1500);
+
+    if (isWishlisted) {
+      // Delay removal slightly so the added animation can be seen (optional, but good UX)
+      setTimeout(() => {
+        removeFromWishlist(product.id);
+      }, 500);
+    }
   };
 
   const handleWishlistClick = (e: MouseEvent) => {
