@@ -15,7 +15,7 @@ const LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { cartCount } = useCart();
+  const { cartCount, openCart } = useCart();
   const { wishlistCount } = useWishlist();
 
   useEffect(() => {
@@ -89,7 +89,7 @@ export default function Navbar() {
               </span>
             )}
           </NavLink>
-          <button className="relative text-brown hover:text-mauve transition-colors flex items-center gap-2">
+          <button onClick={openCart} className="relative text-brown hover:text-mauve transition-colors flex items-center gap-2">
             <ShoppingBag className="w-5 h-5" />
             <span className="absolute -top-1.5 -right-2 bg-mauve text-ivory text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
               {cartCount}
@@ -110,7 +110,7 @@ export default function Navbar() {
                </span>
              )}
            </NavLink>
-           <button className="relative text-brown hover:text-mauve transition-colors flex items-center gap-2">
+           <button onClick={openCart} className="relative text-brown hover:text-mauve transition-colors flex items-center gap-2">
             <ShoppingBag className="w-5 h-5" />
             <span className="absolute -top-1.5 -right-2 bg-mauve text-ivory text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
               {cartCount}
