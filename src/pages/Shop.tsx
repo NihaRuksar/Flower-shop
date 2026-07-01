@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import SectionHeader from '../components/SectionHeader';
 import ProductCard from '../components/ProductCard';
+import Reviews from '../components/Reviews';
 import { products } from '../data';
 import { CATEGORIES } from '../types';
 
@@ -54,7 +55,10 @@ export default function Shop() {
           </div>
         )}
 
+        {/* Reviews Section */}
+        <Reviews />
       </div>
     </div>
   );
 }
+
