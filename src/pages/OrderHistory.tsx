@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Package, Calendar, Tag } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import SectionHeader from '../components/SectionHeader';
 import { Product } from '../types';
 
@@ -62,9 +63,16 @@ export default function OrderHistory() {
                     <span className="flex items-center gap-1.5 bg-ivory px-3 py-1.5 rounded-full"><Calendar className="w-3.5 h-3.5" /> {new Date(order.date).toLocaleDateString()}</span>
                   </div>
                   
-                  <p className="text-sm text-brown/80 leading-relaxed max-w-xl">
+                  <p className="text-sm text-brown/80 leading-relaxed max-w-xl mb-6">
                     {order.product.description}
                   </p>
+
+                  <Link 
+                    to={`/track/${order.orderId}`}
+                    className="inline-flex items-center justify-center px-6 py-2.5 bg-forest text-ivory rounded-full text-sm font-medium hover:bg-forest/90 transition-colors"
+                  >
+                    Track Order
+                  </Link>
                 </div>
               </motion.div>
             ))}
