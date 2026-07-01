@@ -15,7 +15,7 @@ interface ProductCardProps {
 export default function ProductCard({ product, index }: ProductCardProps) {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
-  const { isInWishlist, toggleWishlist } = useWishlist();
+  const { isInWishlist, toggleWishlist, removeFromWishlist } = useWishlist();
   const [added, setAdded] = useState(false);
   const isWishlisted = isInWishlist(product.id);
 
@@ -23,6 +23,11 @@ export default function ProductCard({ product, index }: ProductCardProps) {
     e.preventDefault();
     e.stopPropagation();
     addToCart(product, quantity);
+    
+    if (isWishlisted) {
+      removeFromWishlist(product.id);
+    }
+    
     setAdded(true);
     setTimeout(() => {
       setAdded(false);
